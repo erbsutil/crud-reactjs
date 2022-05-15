@@ -1,14 +1,12 @@
 import React from 'react';
-
-import FormEmployee from './components/FormEmployee';
+import EmployeeProvider from './context/EmployeeContext';
+import ListEmployee from './components/ListEmployee';
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <h2>Listagem</h2>
-
-      <FormEmployee />
-    </div>
+    <EmployeeProvider>
+      <ListEmployee />
+    </EmployeeProvider>
   );
 }
 
