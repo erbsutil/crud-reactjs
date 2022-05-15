@@ -1,74 +1,74 @@
-import React, { useContext } from 'react';
-import {
-  DataEmployeeProps,
-  EmployeeContext,
-  EmployeeContextProps,
-} from '../../context/EmployeeContext';
+import React from 'react';
+
+import { DataEmployeeProps } from '../../types';
+
+import useContextData from '../../hooks/useContextData';
+
 import * as S from './styles';
 
 function EditEmployee(): JSX.Element {
   const {
-    dataEmployees,
-    setDataEmployees,
     currentEmployee,
+    dataEmployees,
     setCurrentEmployee,
-  } = useContext(EmployeeContext) as EmployeeContextProps;
+    setDataEmployees,
+    setIsEditing,
+  } = useContextData();
 
-  function handleSave(employee: DataEmployeeProps) {
+  function handleSave(employeeSelected: DataEmployeeProps) {
     const newObject = dataEmployees.map((e) => {
-      return e.id === employee.id ? employee : e;
+      return e.id === employeeSelected.id ? employeeSelected : e;
     });
     setDataEmployees(newObject);
+
+    setIsEditing(false);
   }
 
   return (
     <S.Content>
-      <h3>Editando</h3>
-      Nome:
-      <S.CustomInput
-        id="first-name"
-        value={currentEmployee.firstName || ''}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setCurrentEmployee({ ...currentEmployee, firstName: e.target.value });
-        }}
-        required
-      />
-      Sobrenome:
-      <S.CustomInput
-        id="last-name"
-        value={currentEmployee.lastName || ''}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setCurrentEmployee({ ...currentEmployee, lastName: e.target.value });
-        }}
-        required
-      />
-      E-mail:
-      <S.CustomInput
-        id="mail"
-        type="email"
-        value={currentEmployee.mail || ''}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setCurrentEmployee({ ...currentEmployee, mail: e.target.value });
-        }}
-        required
-      />
-      NIS:
-      <S.CustomInput
-        id="nis"
-        value={currentEmployee.nis || ''}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setCurrentEmployee({ ...currentEmployee, nis: e.target.value });
-        }}
-        required
-      />
-      <button
-        type="button"
-        onClick={() => {
-          handleSave(currentEmployee);
-        }}
-      >
-        Salvar
-      </button>
+      <form onSubmit={() => handleSave(currentEmployee)}>
+        <h3>Editar - {currentEmployee.firstName}</h3>
+        Nome:
+        <S.CustomInput
+          value={currentEmployee.firstName || ''}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setCurrentEmployee({
+              ...currentEmployee,
+              firstName: e.target.value,
+            });
+          }}
+          required
+        />
+        Sobrenome:
+        <S.CustomInput
+          value={currentEmployee.lastName || ''}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setCurrentEmployee({
+              ...currentEmployee,
+              lastName: e.target.value,
+            });
+          }}
+          required
+        />
+        E-mail:
+        <S.CustomInput
+          type="email"
+          value={currentEmployee.mail || ''}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setCurrentEmployee({ ...currentEmployee, mail: e.target.value });
+          }}
+          required
+        />
+        NIS:
+        <S.CustomInput
+          value={currentEmployee.nis || ''}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setCurrentEmployee({ ...currentEmployee, nis: e.target.value });
+          }}
+          required
+        />
+        <button type="submit">Salvar</button>
+      </form>
     </S.Content>
   );
 }

@@ -1,15 +1,9 @@
 import React, { createContext, useState, useMemo } from 'react';
 
+import { DataEmployeeProps } from '../types';
+
 type EmployeeContextProviderProps = {
   children: React.ReactNode;
-};
-
-export type DataEmployeeProps = {
-  id?: number;
-  firstName?: string;
-  lastName?: string;
-  mail?: string;
-  nis?: string;
 };
 
 export type EmployeeContextProps = {
@@ -17,6 +11,10 @@ export type EmployeeContextProps = {
   setDataEmployees: React.Dispatch<React.SetStateAction<DataEmployeeProps[]>>;
   currentEmployee: DataEmployeeProps;
   setCurrentEmployee: React.Dispatch<React.SetStateAction<DataEmployeeProps>>;
+  isCreating: boolean;
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditing: boolean;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const EmployeeContext = createContext<EmployeeContextProps | null>(null);
@@ -24,6 +22,8 @@ export const EmployeeContext = createContext<EmployeeContextProps | null>(null);
 function EmployeeProvider({ children }: EmployeeContextProviderProps) {
   const [dataEmployees, setDataEmployees] = useState<DataEmployeeProps[]>([]);
   const [currentEmployee, setCurrentEmployee] = useState({});
+  const [isCreating, setIsCreating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const employeeProviderValue = useMemo(
     () => ({
@@ -31,8 +31,21 @@ function EmployeeProvider({ children }: EmployeeContextProviderProps) {
       setDataEmployees,
       currentEmployee,
       setCurrentEmployee,
+      isCreating,
+      setIsCreating,
+      isEditing,
+      setIsEditing,
     }),
-    [dataEmployees, setDataEmployees, currentEmployee, setCurrentEmployee],
+    [
+      dataEmployees,
+      setDataEmployees,
+      currentEmployee,
+      setCurrentEmployee,
+      isCreating,
+      setIsCreating,
+      isEditing,
+      setIsEditing,
+    ],
   );
 
   return (

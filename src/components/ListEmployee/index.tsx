@@ -1,23 +1,25 @@
-import React, { useContext, useState } from 'react';
-import {
-  EmployeeContext,
-  EmployeeContextProps,
-} from '../../context/EmployeeContext';
+import React from 'react';
 
 import EditEmployee from '../EditEmployee';
 import CreateEmployee from '../CreateEmployee';
 
-function ListEmployee(): JSX.Element {
-  const [isCreating, setIsCreating] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+import useContextData from '../../hooks/useContextData';
 
-  const { dataEmployees, setDataEmployees, setCurrentEmployee } = useContext(
-    EmployeeContext,
-  ) as EmployeeContextProps;
+function ListEmployee(): JSX.Element {
+  const {
+    dataEmployees,
+    isCreating,
+    isEditing,
+    setCurrentEmployee,
+    setDataEmployees,
+    setIsCreating,
+    setIsEditing,
+  } = useContextData();
 
   function handleRemove(index: number) {
     const newData = [...dataEmployees];
     newData.splice(index, 1);
+
     setDataEmployees(newData);
   }
 
@@ -28,7 +30,7 @@ function ListEmployee(): JSX.Element {
 
   return (
     <>
-      <h2>Listagem</h2>
+      <h2>Lista de funcionários</h2>
 
       <button
         type="button"
@@ -36,7 +38,7 @@ function ListEmployee(): JSX.Element {
           setIsCreating(true);
         }}
       >
-        Novo
+        Adicionar funcionário
       </button>
 
       <table>
