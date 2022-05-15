@@ -3,19 +3,27 @@ import {
   EmployeeContext,
   EmployeeContextProps,
 } from '../../context/EmployeeContext';
-import FormEmployee from '../FormEmployee';
+
+import EditEmployee from '../EditEmployee';
+import CreateEmployee from '../CreateEmployee';
 
 function ListEmployee(): JSX.Element {
-  const [showFormEmployee, setShowFormEmployee] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-  const { dataEmployees, setDataEmployees } = useContext(
+  const { dataEmployees, setDataEmployees, setCurrentEmployee } = useContext(
     EmployeeContext,
   ) as EmployeeContextProps;
 
-  function removeEmployee(index: number) {
+  function handleRemove(index: number) {
     const newData = [...dataEmployees];
     newData.splice(index, 1);
     setDataEmployees(newData);
+  }
+
+  function handleEdit(index: number) {
+    setIsEditing(true);
+    setCurrentEmployee(dataEmployees[index]);
   }
 
   return (
@@ -25,7 +33,7 @@ function ListEmployee(): JSX.Element {
       <button
         type="button"
         onClick={() => {
-          setShowFormEmployee(true);
+          setIsCreating(true);
         }}
       >
         Novo
@@ -42,9 +50,7 @@ function ListEmployee(): JSX.Element {
           {dataEmployees.map((e, index) => {
             return (
               <tr key={e.nis}>
-                <td>
-                  {e.firstName} - {index}
-                </td>
+                <td>{e.firstName}</td>
                 <td>{e.lastName}</td>
                 <td>{e.mail}</td>
                 <td>{e.nis}</td>
@@ -52,7 +58,7 @@ function ListEmployee(): JSX.Element {
                   <button
                     type="button"
                     onClick={() => {
-                      setShowFormEmployee(true);
+                      handleEdit(index);
                     }}
                   >
                     Editar
@@ -60,7 +66,7 @@ function ListEmployee(): JSX.Element {
                   <button
                     type="button"
                     onClick={() => {
-                      removeEmployee(index);
+                      handleRemove(index);
                     }}
                   >
                     Excluir
@@ -72,13 +78,9 @@ function ListEmployee(): JSX.Element {
         </tbody>
       </table>
 
-      {showFormEmployee && (
-        <FormEmployee
-          onClose={() => {
-            setShowFormEmployee(false);
-          }}
-        />
-      )}
+      {isEditing && <EditEmployee />}
+
+      {isCreating && <CreateEmployee />}
     </>
   );
 }

@@ -4,26 +4,35 @@ type EmployeeContextProviderProps = {
   children: React.ReactNode;
 };
 
-type DataEmployeeProps = {
-  firstName: string;
-  lastName: string;
-  mail: string;
-  nis: string;
+export type DataEmployeeProps = {
+  id?: number;
+  firstName?: string;
+  lastName?: string;
+  mail?: string;
+  nis?: string;
 };
 
 export type EmployeeContextProps = {
   dataEmployees: DataEmployeeProps[];
   setDataEmployees: React.Dispatch<React.SetStateAction<DataEmployeeProps[]>>;
+  currentEmployee: DataEmployeeProps;
+  setCurrentEmployee: React.Dispatch<React.SetStateAction<DataEmployeeProps>>;
 };
 
-export const EmployeeContext = createContext<any>(null);
+export const EmployeeContext = createContext<EmployeeContextProps | null>(null);
 
 function EmployeeProvider({ children }: EmployeeContextProviderProps) {
   const [dataEmployees, setDataEmployees] = useState<DataEmployeeProps[]>([]);
+  const [currentEmployee, setCurrentEmployee] = useState({});
 
   const employeeProviderValue = useMemo(
-    () => ({ dataEmployees, setDataEmployees }),
-    [dataEmployees, setDataEmployees],
+    () => ({
+      dataEmployees,
+      setDataEmployees,
+      currentEmployee,
+      setCurrentEmployee,
+    }),
+    [dataEmployees, setDataEmployees, currentEmployee, setCurrentEmployee],
   );
 
   return (
