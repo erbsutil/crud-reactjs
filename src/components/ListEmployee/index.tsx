@@ -5,6 +5,8 @@ import CreateEmployee from '../CreateEmployee';
 
 import useContextData from '../../hooks/useContextData';
 
+import * as S from './styles';
+
 function ListEmployee(): JSX.Element {
   const {
     dataEmployees,
@@ -29,61 +31,75 @@ function ListEmployee(): JSX.Element {
   }
 
   return (
-    <>
+    <S.Content>
       <h2>Lista de funcionários</h2>
 
-      <button
-        type="button"
-        onClick={() => {
-          setIsCreating(true);
-        }}
-      >
-        Adicionar funcionário
-      </button>
+      <S.ButtonContent>
+        <S.Button
+          type="button"
+          onClick={() => {
+            setIsCreating(true);
+            setIsEditing(false);
+          }}
+          className="blue"
+        >
+          Adicionar funcionário
+        </S.Button>
+      </S.ButtonContent>
 
-      <table>
-        <tbody>
-          <tr>
-            <th>Nome</th>
-            <th>Sobrenome</th>
-            <th>E-mail</th>
-            <th>NIS</th>
-          </tr>
-          {dataEmployees.map((e, index) => {
-            return (
-              <tr key={e.nis}>
-                <td>{e.firstName}</td>
-                <td>{e.lastName}</td>
-                <td>{e.mail}</td>
-                <td>{e.nis}</td>
-                <td>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleEdit(index);
-                    }}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleRemove(index);
-                    }}
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {dataEmployees.length > 0 && (
+        <S.Table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+              <th>E-mail</th>
+              <th>NIS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dataEmployees.map((e, index) => {
+              return (
+                <tr key={e.nis}>
+                  <td>{e.firstName}</td>
+                  <td>{e.lastName}</td>
+                  <td>{e.mail}</td>
+                  <td>{e.nis}</td>
+                  <td>
+                    <S.Actions>
+                      <S.Button
+                        type="button"
+                        onClick={() => {
+                          handleEdit(index);
+                          setIsCreating(false);
+                        }}
+                        className="blue"
+                      >
+                        Editar
+                      </S.Button>
+                      <S.Button
+                        type="button"
+                        onClick={() => {
+                          handleRemove(index);
+                        }}
+                        className="red"
+                        disabled={isEditing}
+                      >
+                        Excluir
+                      </S.Button>
+                    </S.Actions>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </S.Table>
+      )}
 
       {isEditing && <EditEmployee />}
 
       {isCreating && <CreateEmployee />}
-    </>
+    </S.Content>
   );
 }
 

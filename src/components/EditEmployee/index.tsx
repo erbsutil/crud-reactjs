@@ -29,7 +29,7 @@ function EditEmployee(): JSX.Element {
       <form onSubmit={() => handleSave(currentEmployee)}>
         <h3>Editar - {currentEmployee.firstName}</h3>
         Nome:
-        <S.CustomInput
+        <S.Input
           value={currentEmployee.firstName || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentEmployee({
@@ -40,7 +40,7 @@ function EditEmployee(): JSX.Element {
           required
         />
         Sobrenome:
-        <S.CustomInput
+        <S.Input
           value={currentEmployee.lastName || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentEmployee({
@@ -51,7 +51,7 @@ function EditEmployee(): JSX.Element {
           required
         />
         E-mail:
-        <S.CustomInput
+        <S.Input
           type="email"
           value={currentEmployee.mail || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,14 +60,25 @@ function EditEmployee(): JSX.Element {
           required
         />
         NIS:
-        <S.CustomInput
+        <S.Input
           value={currentEmployee.nis || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentEmployee({ ...currentEmployee, nis: e.target.value });
           }}
           required
         />
-        <button type="submit">Salvar</button>
+        <S.ButtonContent>
+          <S.Button
+            type="button"
+            className="red"
+            onClick={() => setIsEditing(false)}
+          >
+            Cancelar
+          </S.Button>
+          <S.Button className="green" type="submit">
+            Salvar
+          </S.Button>
+        </S.ButtonContent>
       </form>
     </S.Content>
   );
