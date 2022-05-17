@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import EditEmployee from '../EditEmployee';
 import CreateEmployee from '../CreateEmployee';
@@ -29,6 +29,21 @@ function ListEmployee(): JSX.Element {
     setIsEditing(true);
     setCurrentEmployee(dataEmployees[index]);
   }
+
+  async function callApi() {
+    const response = await fetch('/api');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+
+    return body;
+  }
+
+  useEffect(() => {
+    callApi()
+      .then((res) => console.log(res?.express))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <S.Content>
