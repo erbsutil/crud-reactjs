@@ -40,10 +40,8 @@ function ListEmployee(): JSX.Element {
   }
 
   useEffect(() => {
-    callApi()
-      .then((res) => console.log(res?.express))
-      .catch((err) => console.log(err));
-  }, []);
+    callApi().then((res) => setDataEmployees(res));
+  }, [setDataEmployees]);
 
   return (
     <S.Content>
@@ -88,7 +86,7 @@ function ListEmployee(): JSX.Element {
                           handleEdit(index);
                           setIsCreating(false);
                         }}
-                        className="blue"
+                        className="green"
                       >
                         Editar
                       </S.Button>
