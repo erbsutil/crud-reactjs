@@ -9,6 +9,14 @@ export const Content = styled.div`
   }
 `;
 
+export const EmptyState = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+`;
+
 export const Table = styled.table`
   border-collapse: collapse;
   border-spacing: 0;

@@ -60,7 +60,7 @@ function ListEmployee(): JSX.Element {
         </S.Button>
       </S.ButtonContent>
 
-      {dataEmployees.length > 0 && (
+      {dataEmployees.length > 0 ? (
         <S.Table>
           <thead>
             <tr>
@@ -107,6 +107,10 @@ function ListEmployee(): JSX.Element {
             })}
           </tbody>
         </S.Table>
+      ) : (
+        !isCreating && (
+          <S.EmptyState>Nenhum funcionário encontrado :(</S.EmptyState>
+        )
       )}
 
       {isEditing && <EditEmployee />}
