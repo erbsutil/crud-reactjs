@@ -55,6 +55,7 @@ function ListEmployee(): JSX.Element {
             setIsEditing(false);
           }}
           className="blue"
+          data-testid="btn-add-employee"
         >
           Adicionar funcionário
         </S.Button>

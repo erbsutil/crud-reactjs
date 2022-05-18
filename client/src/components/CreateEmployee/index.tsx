@@ -29,6 +29,7 @@ function CreateEmployee(): JSX.Element {
             setNewEmployee({ ...newEmployee, firstName: e.target.value });
           }}
           required
+          data-testid="input-firstname"
         />
         <S.Label>Sobrenome:</S.Label>
         <S.Input
@@ -36,6 +37,7 @@ function CreateEmployee(): JSX.Element {
             setNewEmployee({ ...newEmployee, lastName: e.target.value });
           }}
           required
+          data-testid="input-lastname"
         />
         <S.Label>E-mail:</S.Label>
         <S.Input
@@ -44,6 +46,7 @@ function CreateEmployee(): JSX.Element {
             setNewEmployee({ ...newEmployee, mail: e.target.value });
           }}
           required
+          data-testid="input-mail"
         />
         <S.Label>NIS:</S.Label>
         <S.Input
@@ -51,6 +54,7 @@ function CreateEmployee(): JSX.Element {
             setNewEmployee({ ...newEmployee, nis: e.target.value });
           }}
           required
+          data-testid="input-nis"
         />
 
         <S.ButtonContent>
@@ -58,10 +62,11 @@ function CreateEmployee(): JSX.Element {
             type="button"
             className="red"
             onClick={() => setIsCreating(false)}
+            data-testid="btn-cancel"
           >
             Cancelar
           </S.Button>
-          <S.Button type="submit" className="green">
+          <S.Button type="submit" className="green" data-testid="btn-save">
             Salvar
           </S.Button>
         </S.ButtonContent>

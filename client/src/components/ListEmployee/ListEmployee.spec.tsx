@@ -15,5 +15,6 @@ describe('<ListEmployee />', () => {
 
   it('should render correctly', () => {
     expect(screen.getByText('Lista de funcionários')).toBeInTheDocument();
+    expect(screen.getByTestId('btn-add-employee')).toBeInTheDocument();
   });
 });

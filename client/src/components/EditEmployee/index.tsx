@@ -28,7 +28,7 @@ function EditEmployee(): JSX.Element {
     <S.Content>
       <form onSubmit={() => handleSave(currentEmployee)}>
         <h3>Editar - {currentEmployee.firstName}</h3>
-        Nome:
+        <S.Label>Nome:</S.Label>
         <S.Input
           value={currentEmployee.firstName || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +38,9 @@ function EditEmployee(): JSX.Element {
             });
           }}
           required
+          data-testid="input-firstname"
         />
-        Sobrenome:
+        <S.Label>Sobrenome:</S.Label>
         <S.Input
           value={currentEmployee.lastName || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,8 +50,9 @@ function EditEmployee(): JSX.Element {
             });
           }}
           required
+          data-testid="input-lastname"
         />
-        E-mail:
+        <S.Label>E-mail:</S.Label>
         <S.Input
           type="email"
           value={currentEmployee.mail || ''}
@@ -58,24 +60,27 @@ function EditEmployee(): JSX.Element {
             setCurrentEmployee({ ...currentEmployee, mail: e.target.value });
           }}
           required
+          data-testid="input-mail"
         />
-        NIS:
+        <S.Label>NIS:</S.Label>
         <S.Input
           value={currentEmployee.nis || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentEmployee({ ...currentEmployee, nis: e.target.value });
           }}
           required
+          data-testid="input-nis"
         />
         <S.ButtonContent>
           <S.Button
             type="button"
             className="red"
             onClick={() => setIsEditing(false)}
+            data-testid="btn-cancel"
           >
             Cancelar
           </S.Button>
-          <S.Button className="green" type="submit">
+          <S.Button className="green" type="submit" data-testid="btn-save">
             Salvar
           </S.Button>
         </S.ButtonContent>
