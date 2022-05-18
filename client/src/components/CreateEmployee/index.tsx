@@ -23,6 +23,7 @@ function CreateEmployee(): JSX.Element {
     <S.Content>
       <form onSubmit={handleSave}>
         <h3>Adicionar funcionário</h3>
+
         <S.Label>Nome:</S.Label>
         <S.Input
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +32,7 @@ function CreateEmployee(): JSX.Element {
           required
           data-testid="input-firstname"
         />
+
         <S.Label>Sobrenome:</S.Label>
         <S.Input
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +41,7 @@ function CreateEmployee(): JSX.Element {
           required
           data-testid="input-lastname"
         />
+
         <S.Label>E-mail:</S.Label>
         <S.Input
           type="email"
@@ -48,6 +51,7 @@ function CreateEmployee(): JSX.Element {
           required
           data-testid="input-mail"
         />
+
         <S.Label>NIS:</S.Label>
         <S.Input
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +70,7 @@ function CreateEmployee(): JSX.Element {
           >
             Cancelar
           </S.Button>
+
           <S.Button type="submit" className="green" data-testid="btn-save">
             Salvar
           </S.Button>

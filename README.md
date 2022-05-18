@@ -17,3 +17,11 @@ yarn dev
 ```
 
 Note: back to the root before run yarn dev.
+
+
+## Tests
+
+```
+cd client
+yarn test
+```

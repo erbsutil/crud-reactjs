@@ -28,6 +28,7 @@ function EditEmployee(): JSX.Element {
     <S.Content>
       <form onSubmit={() => handleSave(currentEmployee)}>
         <h3>Editar - {currentEmployee.firstName}</h3>
+
         <S.Label>Nome:</S.Label>
         <S.Input
           value={currentEmployee.firstName || ''}
@@ -40,6 +41,7 @@ function EditEmployee(): JSX.Element {
           required
           data-testid="input-firstname"
         />
+
         <S.Label>Sobrenome:</S.Label>
         <S.Input
           value={currentEmployee.lastName || ''}
@@ -52,6 +54,7 @@ function EditEmployee(): JSX.Element {
           required
           data-testid="input-lastname"
         />
+
         <S.Label>E-mail:</S.Label>
         <S.Input
           type="email"
@@ -62,6 +65,7 @@ function EditEmployee(): JSX.Element {
           required
           data-testid="input-mail"
         />
+
         <S.Label>NIS:</S.Label>
         <S.Input
           value={currentEmployee.nis || ''}
@@ -71,6 +75,7 @@ function EditEmployee(): JSX.Element {
           required
           data-testid="input-nis"
         />
+
         <S.ButtonContent>
           <S.Button
             type="button"
@@ -80,6 +85,7 @@ function EditEmployee(): JSX.Element {
           >
             Cancelar
           </S.Button>
+
           <S.Button className="green" type="submit" data-testid="btn-save">
             Salvar
           </S.Button>
