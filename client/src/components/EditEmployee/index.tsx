@@ -1,4 +1,5 @@
 import React from 'react';
+import api from '../../services/api';
 
 import { DataEmployeeProps } from '../../types';
 
@@ -9,17 +10,15 @@ import * as S from './styles';
 function EditEmployee(): JSX.Element {
   const {
     currentEmployee,
-    dataEmployees,
     setCurrentEmployee,
     setDataEmployees,
     setIsEditing,
   } = useContextData();
 
   function handleSave(employeeSelected: DataEmployeeProps) {
-    const newObject = dataEmployees.map((e) => {
-      return e.id === employeeSelected.id ? employeeSelected : e;
-    });
-    setDataEmployees(newObject);
+    api
+      .put('/api', employeeSelected)
+      .then((response) => setDataEmployees(response.data));
 
     setIsEditing(false);
   }

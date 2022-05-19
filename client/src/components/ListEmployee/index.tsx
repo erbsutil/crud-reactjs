@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import api from '../../services/api';
 
 import EditEmployee from '../EditEmployee';
 import CreateEmployee from '../CreateEmployee';
@@ -19,10 +20,9 @@ function ListEmployee(): JSX.Element {
   } = useContextData();
 
   function handleRemove(index: number) {
-    const newData = [...dataEmployees];
-    newData.splice(index, 1);
-
-    setDataEmployees(newData);
+    api
+      .delete(`/api?&itemId=${encodeURIComponent(index)}`)
+      .then((response) => setDataEmployees(response.data));
   }
 
   function handleEdit(index: number) {
@@ -30,17 +30,8 @@ function ListEmployee(): JSX.Element {
     setCurrentEmployee(dataEmployees[index]);
   }
 
-  async function callApi() {
-    const response = await fetch('/api');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  }
-
   useEffect(() => {
-    callApi().then((res) => setDataEmployees(res));
+    api.get('/api').then((response) => setDataEmployees(response.data));
   }, [setDataEmployees]);
 
   return (

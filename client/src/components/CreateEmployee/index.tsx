@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import api from '../../services/api';
 
 import { DataEmployeeProps } from '../../types';
 
@@ -15,7 +16,10 @@ function CreateEmployee(): JSX.Element {
     const newId = dataEmployees.length + 1;
     const newObject = { ...newEmployee, id: newId };
 
-    setDataEmployees([...dataEmployees, newObject]);
+    api
+      .post('/api', newObject)
+      .then((response) => setDataEmployees(response.data));
+
     setIsCreating(false);
   }
 
