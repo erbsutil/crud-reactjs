@@ -30,6 +30,8 @@ function EditEmployee(): JSX.Element {
 
         <S.Label>Nome:</S.Label>
         <S.Input
+          minLength={2}
+          maxLength={30}
           value={currentEmployee.firstName || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentEmployee({
@@ -43,6 +45,8 @@ function EditEmployee(): JSX.Element {
 
         <S.Label>Sobrenome:</S.Label>
         <S.Input
+          minLength={2}
+          maxLength={50}
           value={currentEmployee.lastName || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentEmployee({
@@ -67,6 +71,7 @@ function EditEmployee(): JSX.Element {
 
         <S.Label>NIS:</S.Label>
         <S.Input
+          type="number"
           value={currentEmployee.nis || ''}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentEmployee({ ...currentEmployee, nis: e.target.value });

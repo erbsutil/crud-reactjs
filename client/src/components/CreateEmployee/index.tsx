@@ -30,6 +30,8 @@ function CreateEmployee(): JSX.Element {
 
         <S.Label>Nome:</S.Label>
         <S.Input
+          minLength={2}
+          maxLength={30}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewEmployee({ ...newEmployee, firstName: e.target.value });
           }}
@@ -39,6 +41,8 @@ function CreateEmployee(): JSX.Element {
 
         <S.Label>Sobrenome:</S.Label>
         <S.Input
+          minLength={2}
+          maxLength={50}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewEmployee({ ...newEmployee, lastName: e.target.value });
           }}
@@ -58,6 +62,7 @@ function CreateEmployee(): JSX.Element {
 
         <S.Label>NIS:</S.Label>
         <S.Input
+          type="number"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setNewEmployee({ ...newEmployee, nis: e.target.value });
           }}
